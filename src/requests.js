@@ -6,3 +6,11 @@ export function fetchArticles() {
       return data;
     });
 }
+
+export function fetchArticle(article_id) {
+  return axios
+    .get(`https://test-mrgi.onrender.com/api/articles/${article_id}`)
+    .then((data) => {
+      return data;
+    });
+}
