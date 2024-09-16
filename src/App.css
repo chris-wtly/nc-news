@@ -5,17 +5,34 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.article_div {
+  padding: 2px;
+  margin: 2px;
+  border-top: 2px solid darkgray;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.topic_link {
+  font-size: larger;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.img_card {
+  border-radius: 10px;
+  margin: auto;
+}
+.inner_article_div {
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  width: fit-content;
+  margin: auto;
+}
+
+.comment_bubble {
+  text-align: center;
+  width: 160px;
+  background-color: lightgray;
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 10px;
 }
 
 @keyframes logo-spin {
