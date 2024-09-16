@@ -26,6 +26,25 @@
   margin: auto;
 }
 
+.article {
+  font-size: larger;
+  width: 40%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.comment {
+  font-size: medium;
+  background-color: rgb(235, 235, 235);
+  height: fit-content;
+  width: 500px;
+  border-radius: 8px;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .comment_bubble {
   text-align: center;
   width: 160px;
