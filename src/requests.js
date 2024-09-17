@@ -33,3 +33,15 @@ export function patchArticleLike(article_id, voteChange) {
       return Promise.reject(err);
     });
 }
+
+export function postComment(article_id, comment) {
+  return axios
+    .post(
+      `https://test-mrgi.onrender.com/api/articles/${article_id}/comments`,
+      comment
+    )
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {});
+}
