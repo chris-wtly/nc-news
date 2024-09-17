@@ -20,7 +20,7 @@ export function Comments({ article_id }) {
       <h3>Comments</h3>
       {commentGroup.map((comment) => {
         return (
-          <div className="comment">
+          <div key={comment.comment_id} className="comment">
             <h4>Posted by {comment.author}</h4>
             <article>{comment.body}</article>
             <h5> Posted {comment.created_at}</h5>

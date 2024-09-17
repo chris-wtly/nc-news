@@ -22,3 +22,14 @@ export function fetchComments(article_id) {
       return data;
     });
 }
+
+export function patchArticleLike(article_id, voteChange) {
+  return axios
+    .patch(
+      `https://test-mrgi.onrender.com/api/articles/${article_id}`,
+      voteChange
+    )
+    .catch((err) => {
+      return Promise.reject(err);
+    });
+}
