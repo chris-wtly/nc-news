@@ -14,7 +14,10 @@
 .topic_link {
   font-size: larger;
 }
-
+.del {
+  background-color: lightcoral;
+  margin: auto;
+}
 .img_card {
   border-radius: 10px;
   margin: auto;
