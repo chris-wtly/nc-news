@@ -1,7 +1,9 @@
 import axios from "axios";
-export function fetchArticles() {
+export function fetchArticles(filterTerm) {
   return axios
-    .get("https://test-mrgi.onrender.com/api/articles")
+    .get("https://test-mrgi.onrender.com/api/articles", {
+      params: filterTerm,
+    })
     .then((data) => {
       return data;
     });
@@ -49,4 +51,10 @@ export function deleteComment(comment_id) {
   return axios.delete(
     `https://test-mrgi.onrender.com/api/comments/${comment_id}`
   );
+}
+
+export function fetchTopics() {
+  return axios.get(`https://test-mrgi.onrender.com/api/topics`).then((data) => {
+    return data;
+  });
 }
