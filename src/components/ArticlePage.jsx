@@ -3,9 +3,11 @@ import { useParams } from "react-router-dom";
 import { fetchArticle } from "../requests";
 import { Comments } from "./Comments";
 import { patchArticleLike } from "../requests";
+import { AddComment } from "./addComment";
 
 export function ArticlePage() {
   const { article_id } = useParams();
+  const [commentGroup, setCommentGroup] = useState([]);
 
   const [articleData, setArticleData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +64,16 @@ export function ArticlePage() {
           {likeText} {likes}
         </button>
       </div>
-      <Comments article_id={article_id} />
+      <AddComment
+        article_id={article_id}
+        commentGroup={commentGroup}
+        setCommentGroup={setCommentGroup}
+      />
+      <Comments
+        article_id={article_id}
+        commentGroup={commentGroup}
+        setCommentGroup={setCommentGroup}
+      />
     </>
   );
 }

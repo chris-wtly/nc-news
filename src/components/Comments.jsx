@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchComments } from "../requests";
 
-export function Comments({ article_id }) {
-  const [commentGroup, setCommentGroup] = useState([]);
+export function Comments({ article_id, commentGroup, setCommentGroup }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -10,7 +9,7 @@ export function Comments({ article_id }) {
       setCommentGroup(comments);
       setIsLoading(false);
     });
-  }, []);
+  }, [, commentGroup]);
 
   if (isLoading) {
     return <p>Loading...</p>;
