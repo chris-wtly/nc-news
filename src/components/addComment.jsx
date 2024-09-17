@@ -5,6 +5,7 @@ export function AddComment({ article_id, setCommentGroup, commentGroup }) {
   const [comment, setComment] = useState({ author: "grumpy19", body: "" });
   const [commentBody, setCommentBody] = useState("");
   const [errComment, setErrComment] = useState("");
+  const [isPosting, setIsPosting] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,10 +14,12 @@ export function AddComment({ article_id, setCommentGroup, commentGroup }) {
 
   useEffect(() => {
     if (comment.author !== "" && comment.body !== "") {
+      setIsPosting(true);
       postComment(article_id, comment)
         .then(({ data: { comment_posted } }) => {
-          setCommentGroup([...commentGroup, comment_posted]);
+          setCommentGroup([comment_posted, ...commentGroup]);
           setErrComment("");
+          setIsPosting(false);
         })
         .catch(() => {
           setErrComment(
@@ -25,6 +28,10 @@ export function AddComment({ article_id, setCommentGroup, commentGroup }) {
         });
     }
   }, [comment]);
+
+  if (isPosting) {
+    return <p>Sending Comment</p>;
+  }
 
   return (
     <div>
@@ -39,7 +46,9 @@ export function AddComment({ article_id, setCommentGroup, commentGroup }) {
           }}
         />
         <p>{errComment}</p>
-        <button value={comment} type="submit" />
+        <button value={comment} type="submit">
+          Comment
+        </button>
       </form>
     </div>
   );

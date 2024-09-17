@@ -45,3 +45,8 @@ export function postComment(article_id, comment) {
     })
     .catch((err) => {});
 }
+export function deleteComment(comment_id) {
+  return axios.delete(
+    `https://test-mrgi.onrender.com/api/comments/${comment_id}`
+  );
+}
