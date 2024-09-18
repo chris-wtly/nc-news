@@ -1,25 +1,28 @@
 import { useEffect, useState } from "react";
 import { fetchArticles } from "../requests";
 import { ArticleCard } from "./ArticleCard";
-import { Link, useSearchParams } from "react-router-dom";
 
-export function ArticleContainer() {
+export function ArticleContainer({ searchParams }) {
   const [articleCards, setArticleCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const topicQuery = searchParams.get("topic");
-
-  //console.log(topicQuery);
-
-  //this console log fires twice for some reason, first when the page loads, then the fetch request goes thorugh after clicking a nav link, then the console log fires once more. I'm not sure why.
+  const sortQuery = searchParams.get("sort_by");
+  const orderQuery = searchParams.get("order");
 
   useEffect(() => {
-    fetchArticles({ topic: topicQuery }).then(({ data: { articles } }) => {
+    fetchArticles({
+      topic: topicQuery,
+      sort_by: sortQuery,
+      order: orderQuery,
+    }).then(({ data: { articles } }) => {
+      if (sortQuery === "votes" || sortQuery === "dates") {
+        articles.reverse();
+      }
       setArticleCards(articles);
       setIsLoading(false);
     });
-  }, [topicQuery]);
+  }, [topicQuery, sortQuery, orderQuery]);
 
   if (isLoading) {
     return <p>Loading...</p>;
