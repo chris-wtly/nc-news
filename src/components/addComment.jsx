@@ -22,7 +22,6 @@ export function AddComment({ article_id, setCommentGroup, commentGroup }) {
           setIsPosting(false);
         })
         .catch((err) => {
-          console.log("here");
           if (err) {
             setIsPosting(false);
             setErrComment(

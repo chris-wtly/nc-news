@@ -15,6 +15,7 @@ export function Comments({ article_id, commentGroup, setCommentGroup }) {
       })
       .catch((err) => {
         if (err) {
+          setIsLoading(false);
           setCommentErr(true);
         }
       });

@@ -12,7 +12,6 @@ export function DeleteKey({ author, comment_id }) {
           setDeleteNotification("Comment deleted");
         })
         .catch((err) => {
-          console.log("here");
           if (err) {
             setDeleteNotification("Couldn''t delete your comment at this time");
           }
