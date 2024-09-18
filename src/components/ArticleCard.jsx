@@ -18,7 +18,7 @@ export function ArticleCard({ articleCards }) {
             <h4 className="comment_bubble">
               {articleCard.comment_count} Comments
             </h4>
-            <h5 Date> {articleCard.created_at.toString()}</h5>
+            <h5 Date> {articleCard.created_at}</h5>
           </div>
         );
       })}

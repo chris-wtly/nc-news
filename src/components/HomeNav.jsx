@@ -3,14 +3,26 @@ import { fetchTopics } from "../requests";
 import { Link } from "react-router-dom";
 import { Order } from "./Order";
 import { Sort } from "./Sort";
+import { ErrorLoading } from "./ErrorPage";
 
 export function HomeNav({ setSearchParams, searchParams }) {
   const [topicsList, setTopicsList] = useState([]);
+  const [isTopicErr, setIsTopicErr] = useState(false);
   useEffect(() => {
-    fetchTopics().then(({ data: { topics } }) => {
-      setTopicsList(topics);
-    });
+    fetchTopics()
+      .then(({ data: { topics } }) => {
+        setTopicsList(topics);
+      })
+      .catch((err) => {
+        if (err) {
+          setIsTopicErr(true);
+        }
+      });
   }, []);
+
+  if (isTopicErr) {
+    return <ErrorLoading />;
+  }
 
   return (
     <nav>
@@ -24,11 +36,11 @@ export function HomeNav({ setSearchParams, searchParams }) {
           );
         })}
       </ul>
-      <ul className="NavList" id="outerList">
-        <li className="NavItem">
+      <ul className="noBullets">
+        <li>
           <Sort setSearchParams={setSearchParams} searchParams={searchParams} />
         </li>
-        <li className="NavItem">
+        <li>
           <Order
             setSearchParams={setSearchParams}
             searchParams={searchParams}

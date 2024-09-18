@@ -14,21 +14,21 @@
   align-content: center;
   padding: 0;
   overflow: hidden;
+  list-style-type: none;
 }
 .NavItem {
   float: left;
-
   display: block;
   color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   margin: auto;
+  list-style-type: none;
 }
-#outerList {
-  border-width: 0;
+.noBullets {
+  list-style-type: none;
 }
-
 .article_div {
   padding: 2px;
   margin: 2px;
@@ -55,7 +55,7 @@
 
 .article {
   font-size: larger;
-  width: 40%;
+  width: auto;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
