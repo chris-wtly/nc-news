@@ -21,10 +21,14 @@ export function AddComment({ article_id, setCommentGroup, commentGroup }) {
           setErrComment("");
           setIsPosting(false);
         })
-        .catch(() => {
-          setErrComment(
-            "Error posting comment, please make sure your username is correct"
-          );
+        .catch((err) => {
+          console.log("here");
+          if (err) {
+            setIsPosting(false);
+            setErrComment(
+              "Error posting comment, please make sure your username is correct"
+            );
+          }
         });
     }
   }, [comment]);

@@ -7,9 +7,16 @@ export function DeleteKey({ author, comment_id }) {
   const [deleteCommentBoolean, setDeleteCommentBoolean] = useState(false);
   useEffect(() => {
     if (deleteCommentBoolean) {
-      deleteComment(comment_id).then(() => {
-        setDeleteNotification("Comment deleted");
-      });
+      deleteComment(comment_id)
+        .then(() => {
+          setDeleteNotification("Comment deleted");
+        })
+        .catch((err) => {
+          console.log("here");
+          if (err) {
+            setDeleteNotification("Couldn''t delete your comment at this time");
+          }
+        });
     }
   }, [deleteCommentBoolean]);
 

@@ -6,6 +6,9 @@ export function fetchArticles(filterTerm) {
     })
     .then((data) => {
       return data;
+    })
+    .catch((err) => {
+      return err;
     });
 }
 
@@ -14,6 +17,9 @@ export function fetchArticle(article_id) {
     .get(`https://test-mrgi.onrender.com/api/articles/${article_id}`)
     .then((data) => {
       return data;
+    })
+    .catch((err) => {
+      return err;
     });
 }
 
@@ -22,6 +28,9 @@ export function fetchComments(article_id) {
     .get(`https://test-mrgi.onrender.com/api/articles/${article_id}/comments`)
     .then((data) => {
       return data;
+    })
+    .catch((err) => {
+      return err;
     });
 }
 
@@ -45,16 +54,25 @@ export function postComment(article_id, comment) {
     .then((data) => {
       return data;
     })
-    .catch((err) => {});
+    .catch((err) => {
+      return err;
+    });
 }
 export function deleteComment(comment_id) {
-  return axios.delete(
-    `https://test-mrgi.onrender.com/api/comments/${comment_id}`
-  );
+  return axios
+    .delete(`https://test-mrgi.onrender.com/api/comments/${comment_id}`)
+    .catch((err) => {
+      return Promise.reject(err);
+    });
 }
 
 export function fetchTopics() {
-  return axios.get(`https://test-mrgi.onrender.com/api/topics`).then((data) => {
-    return data;
-  });
+  return axios
+    .get(`https://test-mrgi.onrender.com/api/topics`)
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {
+      return err;
+    });
 }

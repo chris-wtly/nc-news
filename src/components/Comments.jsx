@@ -1,16 +1,28 @@
 import { useEffect, useState } from "react";
 import { fetchComments } from "../requests";
 import { DeleteKey } from "./DeleteKey";
+import { ErrorLoading } from "./ErrorPage";
 
 export function Comments({ article_id, commentGroup, setCommentGroup }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [errComment, setCommentErr] = useState(false);
 
   useEffect(() => {
-    fetchComments(article_id).then(({ data: { comments } }) => {
-      setCommentGroup(comments);
-      setIsLoading(false);
-    });
+    fetchComments(article_id)
+      .then(({ data: { comments } }) => {
+        setCommentGroup(comments);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (err) {
+          setCommentErr(true);
+        }
+      });
   }, []);
+
+  if (errComment) {
+    return <ErrorLoading />;
+  }
 
   if (isLoading) {
     return <p>Loading...</p>;

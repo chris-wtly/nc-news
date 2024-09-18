@@ -8,6 +8,7 @@ import { AddComment } from "./addComment";
 export function ArticlePage() {
   const { article_id } = useParams();
   const [commentGroup, setCommentGroup] = useState([]);
+  const [isErr, setIsErr] = useState(false);
 
   const [articleData, setArticleData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -16,12 +17,22 @@ export function ArticlePage() {
   const [likeText, setLikeText] = useState("Like");
 
   useEffect(() => {
-    fetchArticle(article_id).then(({ data: { articles } }) => {
-      setArticleData(articles);
-      setIsLoading(false);
-      setLikes(articles.votes);
-    });
+    fetchArticle(article_id)
+      .then(({ data: { articles } }) => {
+        setArticleData(articles);
+        setIsLoading(false);
+        setLikes(articles.votes);
+      })
+      .catch((err) => {
+        if (err) {
+          setIsErr(true);
+        }
+      });
   }, []);
+
+  if (isErr) {
+    return <p>404 Page Not Found: Article does not exist</p>;
+  }
 
   const handleLike = () => {
     if (canLike === true) {
@@ -30,6 +41,7 @@ export function ArticlePage() {
       setLikeText("Liked");
       patchArticleLike(article_id, { inc_votes: 1 }).catch((err) => {
         if (err) {
+          setLikes(likes);
           setLikeText("Can't like post at this moment");
         }
       });
@@ -39,6 +51,7 @@ export function ArticlePage() {
       setLikeText("Like");
       patchArticleLike(article_id, { inc_votes: -1 }).catch((err) => {
         if (err) {
+          setLikes(likes);
           setLikeText("Can't like post at this moment");
         }
       });
