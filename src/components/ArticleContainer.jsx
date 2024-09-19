@@ -19,10 +19,14 @@ export function ArticleContainer({ searchParams, setIsErr }) {
     })
       .then(({ data: { articles } }) => {
         if (sortQuery === "votes" || sortQuery === "dates") {
-          articles.reverse();
+          //Is this enough to prevent mutation given that it's only a shallow copy
+          const articleCopy = [...articles].reverse();
+          setArticleCards(articleCopy);
+          setIsLoading(false);
+        } else {
+          setArticleCards(articles);
+          setIsLoading(false);
         }
-        setArticleCards(articles);
-        setIsLoading(false);
       })
       .catch((err) => {
         if (err) {
